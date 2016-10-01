@@ -18,4 +18,4 @@ Create data directory with data from Lukas and return to categorizer directory
 
 Requirements: Ruby
 
-elasticsearch local endpoint http://10.2.22.233:9200/_plugin/head/
+elasticsearch local endpoint http://10.2.22.233:9200/_plugin/head/ with sample data or elasticsearch at our VM is available

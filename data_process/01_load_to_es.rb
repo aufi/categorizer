@@ -1,7 +1,7 @@
 require 'elasticsearch'
 require 'json'
 
-ES = Elasticsearch::Client.new url: 'http://10.2.22.233:9200'
+ES = Elasticsearch::Client.new url: 'http://127.0.0.1:9200'
 
 TITLES = JSON.load(File.read('data/titles.id.txt'))
 

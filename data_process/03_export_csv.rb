@@ -1,7 +1,7 @@
 require 'elasticsearch'
 require 'csv'
 
-ES = Elasticsearch::Client.new url: 'http://10.2.22.233:9200'
+ES = Elasticsearch::Client.new url: 'http://127.0.0.1:9200'
 
 d = ES.search index: 'featured_documents', body: { query: {"query":{"match_all":{}}}, size: 9999, from: 0 } # size: 9999
 

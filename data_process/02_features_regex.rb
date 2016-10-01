@@ -1,6 +1,6 @@
 require 'elasticsearch'
 
-ES = Elasticsearch::Client.new url: 'http://10.2.22.233:9200'
+ES = Elasticsearch::Client.new url: 'http://127.0.0.1:9200'
 
 REGEXP_SELECTORS = [
   {name: 'stavebni', regex: /stavební/},
