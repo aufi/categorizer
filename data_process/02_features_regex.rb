@@ -19,10 +19,9 @@ def assign_regex_cat(record)
     data["feature_#{selector[:name]}"] = content.scan(selector[:regex]).length
   end
   data["text"] = doc['name']  # easy to read
+  p data
   ES.index index: 'featured_documents', type: 'document', id: record['_id'], body: data
 end
-
-puts '02_features_regex'
 
 data = d['hits']['hits']
 
