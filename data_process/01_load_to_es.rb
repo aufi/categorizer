@@ -12,13 +12,9 @@ def load_files_to_es(path = './data')
     files = Dir.entries([path, subdir].join '/').select {|fname| fname =~ /\d+\.txt/ }.each do |f|
       puts f
       id = f.gsub(/[^0-9]/, '')
-      es_store_doc id, categories: '', name: TITLES[id], text: File.read([path, subdir, f].join '/')
+      ES.index index: 'raw_documents', type: 'document', id: id, body: {name: TITLES[id], text: File.read([path, subdir, f].join '/')}
     end
   end
-end
-
-def es_store_doc(id, data)
-  ES.index  index: 'raw_documents', type: 'document', id: id, body: data
 end
 
 #
