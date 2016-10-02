@@ -5,13 +5,9 @@ import re
 
 titles = json.load(open("../titles.id.txt"))
 
-keywords = []
-for line in open('keywords.regexp').read().split("\n"):
-    if line != '':
-        keywords.append(r'%s' % line)
-
 class Classifier:
     patterns = []
+    keywords = []
 
     def __init__(self):
         for pattern in open("patterns.txt").read().split("\n"):
@@ -23,6 +19,10 @@ class Classifier:
                 regexp = re.search(r'\/(.*)\/', regexp).group(1)
                 category = re.search(r'\'(.*)\'', category).group(1)
                 self.patterns.append({'category': category, 'regexp': r'\b{0}\b'.format(regexp)})
+        for line in open('keywords.regexp').read().split("\n"):
+            if line != '':
+                self.keywords.append(r'%s' % line)
+
 
     def run(self, text):
         categories = []
@@ -36,13 +36,13 @@ class Classifier:
         regexp_vec   = []
         sizes_vec    = [
             min([1, math.log(len(text),10)/10]),
-            min([1, math.log(len(re.split(text, r'\s+')),10)/10]),
-            min([1, math.log(len(re.split(text, r'\n\s\n')),10)/10])
+            min([1, math.log(len(re.split(r'\s+', text)),10)/10]),
+            min([1, math.log(len(re.split(r'\n\s\n', text)),10)/10])
         ]
-        for k in keywords:
+        for k in self.keywords:
             keywords_vec.append(1 if re.search(k, text, re.IGNORECASE) else 0)
-        for k in self.patterns:
-            regexp_vec.append(1 if re.search(k, text, re.IGNORECASE) else 0)
+        for p in self.patterns:
+            regexp_vec.append(1 if re.search(p['regexp'], text, re.IGNORECASE) else 0)
         return keywords_vec + regexp_vec + sizes_vec
 
 

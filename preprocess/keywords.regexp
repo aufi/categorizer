@@ -7,8 +7,8 @@ dan
 material
 jednani
 smlouva
-(?-i:DZ)
-(?-i:OOP)
+DZ
+OOP
 opatreni obecne povahy
 silnic
 provoz
@@ -46,7 +46,7 @@ Obdrží účastníci
 Poučení
 veřejnou výzvu
 účastníci řízení dle § 144 zákona č. 500/2004\. Sb\.
-(?-i:SO č\. \d+)
+SO č\. \d+
 vítána znalost
 usnesení
 Přihlášky zasílejte
@@ -69,8 +69,8 @@ zasedání zastupitelstva
 kanalizace
 studna
 půdního fondu
-(?-i:ZPF)
-(?-i:LPF)
+ZPF
+LPF
 odbor životního prostředí
 
 Územní rozhodnutí
