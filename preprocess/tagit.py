@@ -3,8 +3,6 @@ import json
 import math
 import re
 
-titles = json.load(open("../titles.id.txt"))
-
 class Classifier:
     patterns = []
     keywords = []
@@ -46,10 +44,6 @@ class Classifier:
         return keywords_vec + regexp_vec + sizes_vec
 
 
-c = Classifier()
-
-print(len(c.patterns))
-
 def get_categories(id, title, text):
     print("=" * 80)
     categories = set(c.run(text))
@@ -59,10 +53,21 @@ def get_categories(id, title, text):
     print("")
     print(text)
 
-for fname in glob.glob("../data/*/*.txt"):
-    id = re.search(r'\d+\/(\d+)\.txt', fname).group(1)
-    title = titles[id] # fails when not found
-    body = open(fname).read()
-    content = '\n'.join([title, body])
-    #get_categories(id, title, content)
-    print(c.features_vec(content)) #.unshift(id).join(',')
+def process():
+  c = Classifier()
+
+  # print(len(c.patterns))
+
+  titles = json.load(open("../titles.id.txt"))
+
+  for fname in glob.glob("../data/*/*.txt"):
+      id = re.search(r'\d+\/(\d+)\.txt', fname).group(1)
+      title = titles[id] # fails when not found
+      body = open(fname).read()
+      content = '\n'.join([title, body])
+      #get_categories(id, title, content)
+      print(c.features_vec(content)) #.unshift(id).join(',')
+
+# run when directly called
+if __name__ == '__main__':
+    process()
