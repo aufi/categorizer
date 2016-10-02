@@ -16,16 +16,13 @@ class Classifier:
                 regexp, category = splitted
                 regexp = re.search(r'\/(.*)\/', regexp).group(1)
                 category = re.search(r'\'(.*)\'', category).group(1)
-                self.patterns.append({'category': category, 'regexp': regexp})
-            # if len(splitted) == 1:
-            #    patterns << {category: splitted[0]}
+                self.patterns.append({'category': category, 'regexp': r'\b{0}\b'.format(regexp)})
 
     def run(self, text):
         categories = []
         for pattern in self.patterns:
-            print(pattern)
-            if re.search(pattern['regexp'], text):
-                categories << pattern['category']
+            if re.search(pattern['regexp'], text, re.IGNORECASE):
+                categories.append(pattern['category'])
         return categories
 
 
@@ -38,12 +35,11 @@ def get_categories(id, title, text):
     categories = set(c.run(text))
     print("###{0}:{1}".format(id, ','.join(categories)))
     print("")
-    print(res)
+    print(categories)
     print("")
     print(text)
 
 for fname in glob.glob("../data/*/*.txt"):
-    print(fname)
     id = re.search(r'\d+\/(\d+)\.txt', fname).group(1)
     title = titles[id] # fails when not found
     body = open(fname).read()

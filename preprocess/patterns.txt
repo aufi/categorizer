@@ -113,7 +113,7 @@ Exekuce
 /Zahájení exekuce/, 'exekuce'
 /Oznámení o skončení exekuce/, 'exekuce'
 
-/exekuční příkaz ze dne.*{1,60} nabyl právní moci/, 'exekuce'
+/exekuční příkaz ze dne.{1,60} nabyl právní moci/, 'exekuce'
 /Exekutorský úřad/, 'exekuce'
 /soudní exekutor/, 'exekuce'
 /\d+ EXE? \d+/, 'exekuce'
